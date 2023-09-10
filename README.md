@@ -14,7 +14,18 @@ While it's generally advised against using experimental packages in production,
 this one served as a sort of backport package for the last few years,
 incorporating new features before they were added to the standard library (like `slices`, `maps` or `errors`).
 
-This package serves as a bridge, helping libraries integrate slog in a backward-compatible way without having to immediately update their Go version requirement to 1.21.
+This package serves as a bridge, helping libraries integrate slog in a backward-compatible way without having to immediately update their Go version requirement to 1.21. On Go 1.21 (and above), it acts as a drop-in replacement for `log/slog`, while below 1.21 it falls back to `golang.org/x/exp/slog`.
+
+**How does it achieve backwards compatibility?**
+
+Although there's no consensus on whether dropping support for older Go versions is considered backward compatible, a majority seems to believe it is.
+(I don't have scientific proof for this, but it's based on conversations with various individuals across different channels.)
+
+This package adheres to that interpretation of backward compatibility. On Go 1.21, the shim uses type aliases to offer the same API as `slog/log`.
+Once a library upgrades its version requirement to Go 1.21, it should be able to discard this shim and use `log/slog` directly.
+
+For older Go versions, the library might become unstable after removing the shim.
+However, since those older versions are no longer supported, the promise of backward compatibility remains intact.
 
 ## Installation
 
