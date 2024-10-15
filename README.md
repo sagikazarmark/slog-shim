@@ -1,3 +1,6 @@
+> [!WARNING]
+> Project archived: use [slog](https://pkg.go.dev/log/slog) directly.
+
 # [slog](https://pkg.go.dev/log/slog) shim
 
 [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/sagikazarmark/slog-shim/ci.yaml?style=flat-square)](https://github.com/sagikazarmark/slog-shim/actions/workflows/ci.yaml)
